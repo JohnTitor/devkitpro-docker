@@ -15,9 +15,10 @@ RUN wget https://github.com/devkitPro/pacman/releases/latest/download/devkitpro-
     rm devkitpro-pacman.amd64.deb && \
     dkp-pacman -Scc --noconfirm
 
-ENV DEVKITPRO=/opt/devkitpro
-ENV PATH=${DEVKITPRO}/tools/bin:$PATH
-
 RUN dkp-pacman -Syyu --noconfirm switch-dev devkitA64 && \
     dkp-pacman -S --needed --noconfirm `dkp-pacman -Slq dkp-libs | grep '^switch-'` && \
     dkp-pacman -Scc --noconfirm
+
+ENV DEVKITPRO=/opt/devkitpro
+ENV PATH=${DEVKITPRO}/devkitA64/bin:$PATH
+ENV PATH=${DEVKITPRO}/tools/bin:$PATH
